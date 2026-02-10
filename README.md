@@ -1,10 +1,10 @@
-## B&B Dubai Advertising LLC – Portfolio Site
+## Komachi Middle East – Portfolio Site
 
-This repository contains the static portfolio website for **B&B Dubai Advertising LLC**, designed to be deployed on GitHub Pages.
+This repository contains the static portfolio website for **Komachi Middle East**, deployed at [`https://komachime.com/`](https://komachime.com/) and powered by **B&B Dubai Advertising LLC** for production and installation.
 
 ### Structure
 
-- **`index.html`**: Single‑page portfolio with sections for:
+- **`index.html`**: Single‑page portfolio for Komachi Middle East with sections for:
   - Hero / introduction
   - About
   - Services
@@ -13,8 +13,8 @@ This repository contains the static portfolio website for **B&B Dubai Advertisin
   - Contact / enquiry form (mailto link)
 - **`assets/css/styles.css`**: Global layout, typography, responsive navigation and styling for all sections.
 - **Images in root**:
-  - `b&blogo.png` – primary B&B Dubai logo used in header and clients section
-  - `komachi png.png` – Komachi Middle East logo used in portfolio and clients section
+  - `b&blogo.png` – B&B Dubai logo referenced as production partner (optional)
+  - `komachi png.png` – Komachi Middle East logo used in header, portfolio and clients section
   - `Screenshot_2022-07-18_at_11.31.46_1200x1200.jpg` – hero/portfolio image
 - **`CNAME`**: Custom domain configuration for GitHub Pages (keep this file as is if you are using a custom domain).
 
@@ -30,7 +30,7 @@ cd /Users/ajayjose/Documents/B-B-Dubai
 python3 -m http.server 8000
 ```
 
-Then visit `http://localhost:8000` in your browser.
+Then visit `http://localhost:8000` in your browser (the live site is at [`https://komachime.com/`](https://komachime.com/)).
 
 ### Deployment (GitHub Pages)
 
