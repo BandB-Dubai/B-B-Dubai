@@ -7,6 +7,11 @@
     <meta
       name="description"
       content="Komachi Middle East – retail and F&B brand environments in Dubai, UAE – powered by B&B Dubai Advertising LLC with 20+ years of experience in branding, signage and fit-out." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet" />
     <link rel="stylesheet" href="assets/css/styles.css" />
   </head>
   <body>
@@ -17,10 +22,6 @@
             src="komachi png.png"
             alt="Komachi Middle East logo"
             class="brand-logo" />
-          <span class="brand-text">
-            <span class="brand-name">Komachi Middle East</span>
-            <span class="brand-tagline">Brand Environments</span>
-          </span>
         </a>
         <nav class="main-nav">
           <button class="nav-toggle" aria-label="Toggle navigation">
@@ -40,7 +41,7 @@
           class="brand brand-partner"
           aria-label="B&B Dubai Advertising LLC">
           <img
-            src="b&blogo.png"
+            src="b&blogoicon.png"
             alt="B&B Dubai Advertising LLC logo"
             class="brand-logo partner-logo" />
         </a>
@@ -68,12 +69,11 @@
           </div>
         </div>
         <p class="hero-corner-note">
-          20 years<br />
-          <!-- in every page -->
+          <img src="20years.png" alt="20 years of experience" />
         </p>
       </section>
 
-      <section id="about" class="section section-alt">
+      <section id="about" class="section section-alt section-reveal">
         <div class="container two-column">
           <div>
             <h2>About Komachi Middle East</h2>
@@ -109,7 +109,7 @@
         </div>
       </section>
 
-      <section id="services" class="section">
+      <section id="services" class="section section-reveal">
         <div class="container">
           <h2>Services</h2>
           <p class="section-intro">
@@ -149,7 +149,7 @@
         </div>
       </section>
 
-      <section id="portfolio" class="section section-alt">
+      <section id="portfolio" class="section section-alt section-reveal">
         <div class="container">
           <h2>Selected Work</h2>
           <p class="section-intro">
@@ -186,7 +186,7 @@
         </div>
       </section>
 
-      <section id="clients" class="section">
+      <section id="clients" class="section section-reveal">
         <div class="container">
           <h2>Clients &amp; Partners</h2>
           <p class="section-intro">
@@ -201,7 +201,7 @@
         </div>
       </section>
 
-      <section id="contact" class="section section-alt">
+      <section id="contact" class="section section-alt section-reveal">
         <div class="container two-column contact-section">
           <div>
             <h2>Let’s Talk About Your Next Project</h2>
@@ -270,6 +270,8 @@
     <script>
       const navToggle = document.querySelector(".nav-toggle");
       const navLinks = document.querySelector(".nav-links");
+      const header = document.querySelector(".site-header");
+      const navAnchors = document.querySelectorAll('.nav-links a[href^="#"]');
 
       if (navToggle && navLinks) {
         navToggle.addEventListener("click", () => {
@@ -277,6 +279,39 @@
           navToggle.classList.toggle("open");
         });
       }
+
+      navAnchors.forEach((a) => {
+        a.addEventListener("click", (e) => {
+          navLinks.classList.remove("open");
+          navToggle.classList.remove("open");
+        });
+      });
+
+      if (header) {
+        let lastScroll = 0;
+        window.addEventListener(
+          "scroll",
+          () => {
+            const y = window.scrollY;
+            header.classList.toggle("scrolled", y > 20);
+            lastScroll = y;
+          },
+          { passive: true },
+        );
+      }
+
+      const sections = document.querySelectorAll(".section-reveal");
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("revealed");
+            }
+          });
+        },
+        { threshold: 0.12, rootMargin: "0px 0px -60px 0px" },
+      );
+      sections.forEach((s) => observer.observe(s));
     </script>
   </body>
 </html>
