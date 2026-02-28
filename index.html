@@ -73,7 +73,7 @@
         </p>
       </section>
 
-      <section id="about" class="section section-alt">
+      <section id="about" class="section section-alt section-reveal">
         <div class="container two-column">
           <div>
             <h2>About Komachi Middle East</h2>
@@ -109,7 +109,7 @@
         </div>
       </section>
 
-      <section id="services" class="section">
+      <section id="services" class="section section-reveal">
         <div class="container">
           <h2>Services</h2>
           <p class="section-intro">
@@ -149,7 +149,7 @@
         </div>
       </section>
 
-      <section id="portfolio" class="section section-alt">
+      <section id="portfolio" class="section section-alt section-reveal">
         <div class="container">
           <h2>Selected Work</h2>
           <p class="section-intro">
@@ -186,7 +186,7 @@
         </div>
       </section>
 
-      <section id="clients" class="section">
+      <section id="clients" class="section section-reveal">
         <div class="container">
           <h2>Clients &amp; Partners</h2>
           <p class="section-intro">
@@ -201,7 +201,7 @@
         </div>
       </section>
 
-      <section id="contact" class="section section-alt">
+      <section id="contact" class="section section-alt section-reveal">
         <div class="container two-column contact-section">
           <div>
             <h2>Let’s Talk About Your Next Project</h2>
@@ -270,6 +270,8 @@
     <script>
       const navToggle = document.querySelector(".nav-toggle");
       const navLinks = document.querySelector(".nav-links");
+      const header = document.querySelector(".site-header");
+      const navAnchors = document.querySelectorAll('.nav-links a[href^="#"]');
 
       if (navToggle && navLinks) {
         navToggle.addEventListener("click", () => {
@@ -277,6 +279,39 @@
           navToggle.classList.toggle("open");
         });
       }
+
+      navAnchors.forEach((a) => {
+        a.addEventListener("click", (e) => {
+          navLinks.classList.remove("open");
+          navToggle.classList.remove("open");
+        });
+      });
+
+      if (header) {
+        let lastScroll = 0;
+        window.addEventListener(
+          "scroll",
+          () => {
+            const y = window.scrollY;
+            header.classList.toggle("scrolled", y > 20);
+            lastScroll = y;
+          },
+          { passive: true },
+        );
+      }
+
+      const sections = document.querySelectorAll(".section-reveal");
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("revealed");
+            }
+          });
+        },
+        { threshold: 0.12, rootMargin: "0px 0px -60px 0px" },
+      );
+      sections.forEach((s) => observer.observe(s));
     </script>
   </body>
 </html>
