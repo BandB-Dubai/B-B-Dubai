@@ -25,6 +25,7 @@
 body {
   margin: 0;
   font-family:
+    "Plus Jakarta Sans",
     system-ui,
     -apple-system,
     BlinkMacSystemFont,
@@ -287,13 +288,14 @@ a {
   position: fixed;
   right: 1.5rem;
   bottom: 1.5rem;
-  font-size: 0.78rem;
-  color: var(--color-text-muted);
-  text-align: right;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  line-height: 1.5;
   pointer-events: none;
+}
+
+.hero-corner-note img {
+  display: block;
+  max-height: 70px;
+  width: auto;
+  opacity: 0.9;
 }
 
 /* Cards & Surfaces */
