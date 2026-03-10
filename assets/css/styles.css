@@ -1640,6 +1640,17 @@ select {
   animation: cornerNoteFade 1.2s ease-out 0.8s both;
 }
 
+@keyframes cornerNoteFade {
+  from {
+    opacity: 0;
+    transform: translateX(12px);
+  }
+  to {
+    opacity: 0.9;
+    transform: translateX(0);
+  }
+}
+
 @media (max-width: 768px) {
   .hero-corner-note {
     display: none;
