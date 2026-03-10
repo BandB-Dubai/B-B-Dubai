@@ -577,7 +577,6 @@ select {
   height: 26px;
   width: auto;
   opacity: 0.55;
-  /* border-radius: var(--r-sm); */
 }
 .hero-subbrand strong {
   color: rgba(255, 255, 255, 0.6);
