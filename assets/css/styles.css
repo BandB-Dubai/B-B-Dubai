@@ -1623,3 +1623,25 @@ select {
     padding: 0.45rem 0.75rem;
   }
 }
+
+.hero-corner-note {
+  position: fixed;
+  right: 1rem;
+  bottom: 1.5rem;
+  pointer-events: none;
+  z-index: 999;
+}
+
+.hero-corner-note img {
+  display: block;
+  max-height: 70px;
+  width: auto;
+  opacity: 0.9;
+  animation: cornerNoteFade 1.2s ease-out 0.8s both;
+}
+
+@media (max-width: 768px) {
+  .hero-corner-note {
+    display: none;
+  }
+}
