@@ -1,0 +1,19 @@
+{
+  "name": "b-b-dubai",
+  "version": "1.0.0",
+  "description": "This repository contains the static portfolio website for **Komachi Middle East**, deployed at [`https://komachime.com/`](https://komachime.com/) and powered by **B&B Dubai Advertising LLC** for production and installation.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com-ajay:BandB-Dubai/B-B-Dubai.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "sharp": "^0.34.5"
+  }
+}
