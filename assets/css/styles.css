@@ -5,21 +5,21 @@
 /* ── 1. DESIGN TOKENS ─────────────────────────────── */
 :root {
   /* Core colours */
-  --c-navy-950: #060a14;
-  --c-navy-900: #090e1a;
-  --c-navy-800: #0d1525;
-  --c-navy-700: #122033;
+  --c-navy-950: #0C0800;   /* warm near-black  */
+  --c-navy-900: #120E02;   /* warm dark charcoal */
+  --c-navy-800: #1C1606;   /* warm medium dark */
+  --c-navy-700: #281F08;   /* warm amber-dark */
   --c-accent: #f5a623; /* warm gold  */
   --c-accent-lt: #fbbf24; /* amber tint */
   --c-orange: #f97316; /* orange CTA */
   --c-white: #ffffff;
-  --c-off-white: #f8f9fc;
-  --c-gray-100: #f3f4f6;
-  --c-gray-200: #e5e7eb;
-  --c-gray-400: #9ca3af;
-  --c-gray-500: #6b7280;
-  --c-text: #111827;
-  --c-text-muted: #4b5563;
+  --c-off-white: #FDF9F0;  /* warm ivory */
+  --c-gray-100: #F5F0E8;   /* warm cream */
+  --c-gray-200: #E8E0D0;   /* warm border */
+  --c-gray-400: #a09080;
+  --c-gray-500: #7a6e60;
+  --c-text: #1a1208;       /* warm near-black text */
+  --c-text-muted: #5c4f3a; /* warm muted text */
 
   /* Surfaces */
   --s-light: var(--c-off-white);
@@ -257,16 +257,16 @@ select {
   top: 0;
   z-index: 100;
   height: var(--header-h);
-  background: rgba(9, 14, 26, 0.92);
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(12, 8, 0, 0.93);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(245, 166, 35, 0.12);
   transition:
     box-shadow var(--t-base),
     background var(--t-base);
 }
 .site-header.scrolled {
-  background: rgba(6, 10, 20, 0.97);
-  box-shadow: 0 4px 40px rgba(0, 0, 0, 0.5);
+  background: rgba(10, 7, 0, 0.98);
+  box-shadow: 0 4px 40px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(245, 166, 35, 0.1);
 }
 
 .header-inner {
@@ -390,50 +390,100 @@ select {
   min-height: calc(100vh - var(--header-h));
   display: flex;
   align-items: center;
-  background: var(--c-navy-950);
+  background: #0A0600;
   overflow: hidden;
   padding-block: var(--sp-20);
 }
 
-/* Layered background effects */
-.hero-grid {
+/* ── Slideshow ───────────────────────────── */
+.hero-slideshow {
   position: absolute;
   inset: 0;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
-  background-size: 72px 72px;
-  pointer-events: none;
+  z-index: 0;
 }
-.hero-glow {
+
+.hero-slide {
   position: absolute;
   inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transform: scale(1.05);
+  animation: slide-cycle 35s ease-in-out infinite;
+}
+
+.hero-slide--1 {
+  background-image: url('../images/gallery/signage-altelal-supermarket-a.webp');
+  animation-delay: 0s;
+}
+.hero-slide--2 {
+  background-image: url('../images/gallery/vehicle-big-bus-wrap.webp');
+  background-position: center 40%;
+  animation-delay: 7s;
+}
+.hero-slide--3 {
+  background-image: url('../images/gallery/signage-sultan-branding.webp');
+  background-position: center 30%;
+  animation-delay: 14s;
+}
+.hero-slide--4 {
+  background-image: url('../images/gallery/events-conmix-exhibition.webp');
+  background-position: center;
+  animation-delay: 21s;
+}
+.hero-slide--5 {
+  background-image: url('../images/gallery/signage-altelal-supermarket-b.webp');
+  background-position: center 35%;
+  animation-delay: 28s;
+}
+
+@keyframes slide-cycle {
+  0%    { opacity: 0;    transform: scale(1.05); }
+  4%    { opacity: 1;    transform: scale(1.02); }
+  20%   { opacity: 1;    transform: scale(1.00); }
+  24%   { opacity: 0;    transform: scale(1.00); }
+  100%  { opacity: 0;    transform: scale(1.05); }
+}
+
+/* Gradient overlay — ensures text is always readable */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
   background:
-    radial-gradient(
-      ellipse 70% 60% at 15% 55%,
-      rgba(245, 166, 35, 0.14) 0%,
-      transparent 65%
+    linear-gradient(
+      to right,
+      rgba(8, 5, 0, 0.82) 0%,
+      rgba(8, 5, 0, 0.60) 55%,
+      rgba(8, 5, 0, 0.35) 100%
     ),
-    radial-gradient(
-      ellipse 40% 40% at 85% 20%,
-      rgba(249, 115, 22, 0.08) 0%,
-      transparent 60%
+    linear-gradient(
+      to top,
+      rgba(8, 5, 0, 0.70) 0%,
+      transparent 50%
     );
   pointer-events: none;
 }
-.hero-noise {
+
+/* Subtle diagonal texture on top */
+.hero-grid {
   position: absolute;
   inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 200px;
-  opacity: 0.6;
+  z-index: 2;
+  background-image:
+    repeating-linear-gradient(
+      -45deg,
+      rgba(245, 166, 35, 0.035) 0px,
+      rgba(245, 166, 35, 0.035) 1px,
+      transparent 1px,
+      transparent 65px
+    );
   pointer-events: none;
 }
 
 .hero-inner {
   position: relative;
-  z-index: 1;
+  z-index: 3;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -491,13 +541,16 @@ select {
 .hero-title-accent {
   display: block;
   background: linear-gradient(
-    135deg,
-    var(--c-accent-lt) 0%,
-    var(--c-orange) 100%
+    125deg,
+    #ffd166 0%,
+    var(--c-accent) 35%,
+    var(--c-orange) 70%,
+    #e85d04 100%
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  filter: drop-shadow(0 0 40px rgba(245, 166, 35, 0.35));
 }
 
 .hero-subtitle {
@@ -528,10 +581,11 @@ select {
   flex-wrap: wrap;
   justify-content: center;
   padding: var(--sp-5) var(--sp-8);
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: var(--r-xl);
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   animation: fadeInUp 0.7s 0.48s ease both;
 }
 .hero-stat {
@@ -585,6 +639,7 @@ select {
   position: absolute;
   bottom: var(--sp-8);
   left: 50%;
+  z-index: 3;
   transform: translateX(-50%);
   display: flex;
   align-items: center;
@@ -1002,7 +1057,7 @@ select {
 
 /* ── 12. CLIENTS / MARQUEE ────────────────────────── */
 .clients-section {
-  background: var(--s-white);
+  background: var(--c-off-white);
 }
 .clients-section .section-intro {
   margin-bottom: var(--sp-10);
@@ -1027,11 +1082,11 @@ select {
 }
 .marquee-outer::before {
   left: 0;
-  background: linear-gradient(to right, var(--s-white), transparent);
+  background: linear-gradient(to right, var(--c-off-white), transparent);
 }
 .marquee-outer::after {
   right: 0;
-  background: linear-gradient(to left, var(--s-white), transparent);
+  background: linear-gradient(to left, var(--c-off-white), transparent);
 }
 
 .marquee-track {
@@ -1064,32 +1119,32 @@ select {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--sp-4) var(--sp-5);
-  background: var(--c-gray-100);
-  border: 1px solid var(--c-gray-200);
-  border-radius: var(--r-md);
-  height: 80px;
-  min-width: 120px;
+  padding: var(--sp-4) var(--sp-6);
+  background: #ffffff;
+  border: 1.5px solid rgba(245, 166, 35, 0.18);
+  border-radius: var(--r-lg);
+  height: 88px;
+  min-width: 140px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
   transition:
-    background var(--t-base),
     border-color var(--t-base),
+    box-shadow var(--t-base),
     transform var(--t-base);
 }
 .client-logo-item:hover {
-  background: var(--s-white);
   border-color: var(--c-accent);
-  transform: translateY(-2px);
-  box-shadow: var(--sh-sm);
+  box-shadow: 0 6px 28px rgba(245, 166, 35, 0.22), 0 2px 8px rgba(0, 0, 0, 0.08);
+  transform: translateY(-3px) scale(1.02);
 }
 .client-logo-item img {
-  max-height: 44px;
-  max-width: 110px;
+  max-height: 52px;
+  max-width: 120px;
   object-fit: contain;
-  filter: grayscale(30%);
-  transition: filter var(--t-base);
+  filter: none;
+  transition: transform var(--t-base);
 }
 .client-logo-item:hover img {
-  filter: grayscale(0);
+  transform: scale(1.05);
 }
 
 .clients-note {
@@ -1101,7 +1156,24 @@ select {
 
 /* ── 13. CONTACT ──────────────────────────────────── */
 .contact-section {
-  background: var(--c-navy-900);
+  background:
+    radial-gradient(ellipse 80% 60% at 90% 10%, rgba(245, 166, 35, 0.13) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 50% at 5% 90%, rgba(249, 115, 22, 0.09) 0%, transparent 55%),
+    linear-gradient(160deg, #1C1400 0%, #120E02 45%, #0C0800 100%);
+  position: relative;
+  overflow: hidden;
+}
+.contact-section::before {
+  content: '';
+  position: absolute;
+  top: -120px;
+  right: -80px;
+  width: 480px;
+  height: 480px;
+  background: radial-gradient(circle, rgba(245, 166, 35, 0.1) 0%, transparent 65%);
+  border-radius: 50%;
+  filter: blur(40px);
+  pointer-events: none;
 }
 
 .contact-grid {
@@ -1490,8 +1562,8 @@ select {
     position: fixed;
     inset-inline: var(--sp-4);
     top: calc(var(--header-h) + 8px);
-    background: rgba(9, 14, 26, 0.97);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(15, 11, 2, 0.98);
+    border: 1px solid rgba(245, 166, 35, 0.15);
     border-radius: var(--r-xl);
     padding: var(--sp-4);
     box-shadow: var(--sh-lg);
